@@ -27,6 +27,21 @@
   color: black;
 }
 
+input:focus,
+button:focus,
+textarea:focus,
+select:focus {
+  @apply outline-limeHover;
+  @apply outline-4;
+  @apply outline-offset-4;
+}
+
+.active {
+  @apply bg-limeMain;
+  @apply text-white;
+  @apply rounded;
+}
+
 /* :global(.leaflet-popup .leaflet-popup-content-wrapper) {
   background-color: var(--color-dark--1);
   color: var(--color-light--2);

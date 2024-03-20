@@ -69,7 +69,9 @@ const Map = () => {
             key={place.date}
           >
             <Popup>
-              <h3 className="font-semibold">{place.place}</h3>
+              <h3 className="font-semibold">
+                {place.city ? place.city : place.region}
+              </h3>
               <div className="flex items-center gap-3">
                 <img
                   alt="Country flag"

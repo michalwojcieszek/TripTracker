@@ -17,13 +17,14 @@ const placesSlice = createSlice({
       return state;
       //   localStorage.setItem('places', JSON.stringify(action.payload));
     },
-    // removePlace: (state, action) => {
-    //   state = null;
-    //   localStorage.getItem('places').clear();
-    // },
+    removePlace: (state, action) => {
+      state = state.filter((place) => place.tripId !== action.payload);
+      return state;
+      // localStorage.getItem('places').clear();
+    },
   },
 });
 
-export const { addPlace } = placesSlice.actions;
+export const { addPlace, removePlace } = placesSlice.actions;
 
 export default placesSlice.reducer;
