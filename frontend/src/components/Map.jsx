@@ -17,6 +17,7 @@ const Map = () => {
   const [mapPosition, setMapPosition] = useState([40, 20]);
   const dispatch = useDispatch();
   const places = useSelector((state) => state.places);
+  const current = useSelector((state) => state.current);
 
   const {
     isLoading: isLoadingPosition,
@@ -25,12 +26,16 @@ const Map = () => {
   } = useGeolocation();
 
   useEffect(() => {
-    if (geolocationPosition) {
-      setMapPosition([geolocationPosition.lat, geolocationPosition.lng]);
+    if (current) {
+      setMapPosition([current.lat, current.lng]);
     } else {
-      getPosition();
+      if (geolocationPosition) {
+        setMapPosition([geolocationPosition.lat, geolocationPosition.lng]);
+      } else {
+        getPosition();
+      }
     }
-  }, [geolocationPosition]);
+  }, [geolocationPosition, current]);
 
   function DetectClick() {
     useMapEvents({

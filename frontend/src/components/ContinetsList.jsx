@@ -18,12 +18,12 @@ const ContinetsList = () => {
   return (
     <>
       {places.length === 0 ? (
-        <h2 className="py-5 text-center text-2xl font-bold ">
+        <h2 className="text-center text-2xl font-bold ">
           You have no trips yet. <br />
           Tap on map to add some.
         </h2>
       ) : (
-        <h2 className="py-5 text-center text-2xl font-bold ">
+        <h2 className="mb-5 text-center text-2xl font-bold ">
           Continets visited during your{' '}
           <span className="text-limeMain">trips</span>
         </h2>
@@ -32,6 +32,7 @@ const ContinetsList = () => {
         {continents.map((continent) => (
           <li
             className={`z-50 flex w-full items-center justify-between overflow-x-hidden rounded-xl border-l-8 border-l-limeMain bg-greyLight px-5 py-3 transition-transform hover:translate-x-2`}
+            key={continent}
           >
             <div className="flex items-center gap-2">
               <ImEarth className="text-xl" />
