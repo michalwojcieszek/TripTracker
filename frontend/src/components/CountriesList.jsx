@@ -1,6 +1,8 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import NoTripsYetText from './NoTripsYetText';
+import FlagImg from './FlagImg';
 
 const CountriesList = () => {
   const places = useSelector((state) => state.places);
@@ -17,10 +19,7 @@ const CountriesList = () => {
   return (
     <>
       {places.length === 0 ? (
-        <h2 className="mb-5 text-center text-2xl font-bold ">
-          You have no trips yet. <br />
-          Tap on map to add some.
-        </h2>
+        <NoTripsYetText />
       ) : (
         <h2 className="mb-5 text-center text-2xl font-bold ">
           Countries visited during your{' '}
@@ -35,11 +34,7 @@ const CountriesList = () => {
             onClick={() => navigate(`${country.countryCode}`)}
           >
             <div className="flex items-center gap-2">
-              <img
-                alt="Country flag"
-                width="30rem"
-                src={`https://flagsapi.com/${country.countryCode}/flat/64.png`}
-              />
+              <FlagImg code={country.countryCode} />
               <h3 className="text-lg font-bold">{country.country}</h3>
             </div>
           </li>

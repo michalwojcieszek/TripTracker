@@ -8,6 +8,7 @@ const Country = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const [country, setCountry] = useState(null);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     if (id) {
@@ -17,6 +18,9 @@ const Country = () => {
             `https://restcountries.com/v3.1/alpha/${id}
           `,
           );
+          if (!res.ok) {
+            throw new Error('Failed to fetch country data ❌');
+          }
           const [data] = await res.json();
           setCountry(data);
           console.log(data);
@@ -25,13 +29,19 @@ const Country = () => {
           console.log(Object.keys(data.currencies));
           dispatch(setCurrent({ lat, lng }));
         } catch (err) {
-          console.log(err);
+          setError(err.message);
         }
       }
       getCountryInfoHandler();
     }
   }, [setCountry, id]);
 
+  if (error)
+    return (
+      <div>
+        <p className="text-center text-2xl">{error}</p>
+      </div>
+    );
   if (!country) return <Spinner />;
 
   return (

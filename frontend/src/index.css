@@ -33,13 +33,32 @@ textarea:focus,
 select:focus {
   @apply outline-limeHover;
   @apply outline-4;
-  @apply outline-offset-4;
+  @apply outline-offset-2;
 }
 
 .active {
   @apply bg-limeMain;
   @apply text-white;
   @apply rounded;
+}
+
+.bounce {
+  animation: bounce 3s ease infinite;
+}
+@keyframes bounce {
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-5px);
+  }
+  60% {
+    transform: translateY(-10px);
+  }
 }
 
 /* :global(.leaflet-popup .leaflet-popup-content-wrapper) {

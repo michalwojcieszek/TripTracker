@@ -5,6 +5,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addPlace } from '../slices/placesSlice';
 import { clearCurrent } from '../slices/currentSlice';
 import { useNavigate } from 'react-router-dom';
+import FlagImg from './FlagImg';
+import FormRowDiv from './FormRowDiv';
+import Form from './Form';
+import ButtonPrimary from './ButtonPrimary';
 
 const BASE_URL = 'https://api.bigdatacloud.net/data/reverse-geocode-client';
 
@@ -90,11 +94,11 @@ const AddPlaceForm = () => {
       {current ? (
         countryCode ? (
           <>
-            <h2 className="py-5 text-center text-2xl font-bold">
+            <h2 className="text-center text-2xl font-bold">
               Add your <span className="text-limeMain">trip</span>
             </h2>
-            <form onSubmit={addTripHandler} className="flex flex-col gap-3">
-              <div className="flex flex-col gap-1">
+            <Form onSubmit={addTripHandler}>
+              <FormRowDiv>
                 <label>Latitude</label>
                 <input
                   value={latitude}
@@ -102,8 +106,8 @@ const AddPlaceForm = () => {
                   readOnly
                   className="rounded bg-greyLight px-3 py-2"
                 />
-              </div>
-              <div className="flex flex-col gap-1">
+              </FormRowDiv>
+              <FormRowDiv>
                 <label>Longitude</label>
                 <input
                   value={longitude}
@@ -111,16 +115,12 @@ const AddPlaceForm = () => {
                   readOnly
                   className="rounded bg-greyLight px-3 py-2"
                 />
-              </div>
-              <div className="flex flex-col gap-1">
+              </FormRowDiv>
+              <FormRowDiv>
                 <label>Country</label>
                 <div className="flex gap-3">
                   <div className="flex items-center">
-                    <img
-                      alt="Country flag"
-                      width="30rem"
-                      src={`https://flagsapi.com/${countryCode}/flat/64.png`}
-                    />
+                    <FlagImg code={countryCode} />
                   </div>
                   <input
                     value={country}
@@ -129,8 +129,8 @@ const AddPlaceForm = () => {
                     className=" grow rounded bg-greyLight px-3 py-2"
                   />
                 </div>
-              </div>
-              <div className="flex flex-col gap-1">
+              </FormRowDiv>
+              <FormRowDiv>
                 <label>City</label>
                 <input
                   value={regionOnly ? '' : city}
@@ -138,7 +138,7 @@ const AddPlaceForm = () => {
                   className={`${regionOnly ? 'bg-greyMedium' : 'bg-greyLight'} rounded  px-3 py-2`}
                   disabled={regionOnly}
                 />
-              </div>
+              </FormRowDiv>
               <div className="flex flex-col gap-1">
                 <label>Region</label>
                 <input
@@ -156,7 +156,7 @@ const AddPlaceForm = () => {
                   className="w-4 accent-limeMain"
                 />
               </div>
-              <div className="flex flex-col gap-1">
+              <FormRowDiv>
                 <label>Date</label>
                 <DatePicker
                   id="date"
@@ -165,27 +165,25 @@ const AddPlaceForm = () => {
                   dateFormat="dd/MM/yyyy"
                   className="bg rounded bg-greyLight px-3 py-2"
                 />
-              </div>
-              <div className="flex flex-col gap-1">
+              </FormRowDiv>
+              <FormRowDiv>
                 <label>Description</label>
                 <textarea
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
                   className="rounded bg-greyLight px-3 py-2"
                 />
-              </div>
-              <button className="mt-3 rounded-xl bg-limeMain px-4 py-3 font-bold uppercase tracking-widest text-white hover:bg-limeHover	">
-                Add favourite place
-              </button>
-            </form>
+              </FormRowDiv>
+              <ButtonPrimary>Add favourite place</ButtonPrimary>
+            </Form>
           </>
         ) : (
-          <h2 className="py-5	 text-center text-2xl font-bold">
-            Selected place is not a country{' '}
+          <h2 className="	 text-center text-2xl font-bold">
+            Selected place is not a country 🗺️{' '}
           </h2>
         )
       ) : (
-        <h2 className="py-5	 text-center text-2xl font-bold">
+        <h2 className="text-center text-2xl font-bold">
           Tap on map to add your <span className="text-limeMain">trip</span>
         </h2>
       )}

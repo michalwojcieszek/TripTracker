@@ -11,6 +11,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setCurrent } from '../slices/currentSlice';
 import { useNavigate } from 'react-router-dom';
 import { useGeolocation } from '../hooks/useGeolocation';
+import FlagImg from './FlagImg';
+import Logout from './Logout';
 
 const Map = () => {
   const navigate = useNavigate();
@@ -61,6 +63,7 @@ const Map = () => {
       zoom={5}
       scrollWheelZoom={true}
       style={{ height: '100%', width: '100%' }}
+      className="relative"
     >
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -78,11 +81,7 @@ const Map = () => {
                 {place.city ? place.city : place.region}
               </h3>
               <div className="flex items-center gap-3">
-                <img
-                  alt="Country flag"
-                  width="30rem"
-                  src={`https://flagsapi.com/${place.countryCode}/flat/64.png`}
-                />{' '}
+                <FlagImg code={place.countryCode} />
                 {place.country}
               </div>
             </Popup>
@@ -92,6 +91,7 @@ const Map = () => {
       <ChangeCenter position={mapPosition} />
 
       <DetectClick />
+      <Logout />
     </MapContainer>
   );
 };

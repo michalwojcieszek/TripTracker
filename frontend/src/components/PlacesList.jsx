@@ -5,6 +5,8 @@ import { RiLandscapeFill } from 'react-icons/ri';
 import { FaBuildingColumns } from 'react-icons/fa6';
 import { useNavigate } from 'react-router-dom';
 import { removePlace } from '../slices/placesSlice';
+import NoTripsYetText from './NoTripsYetText';
+import FlagImg from './FlagImg';
 
 const PlacesList = () => {
   const places = useSelector((state) => state.places);
@@ -26,10 +28,7 @@ const PlacesList = () => {
   return (
     <>
       {places.length === 0 ? (
-        <h2 className="text-center text-2xl font-bold ">
-          You have no trips yet. <br />
-          Tap on map to add some.
-        </h2>
+        <NoTripsYetText />
       ) : (
         <h2 className="mb-5 text-center text-2xl font-bold ">
           Your <span className="text-limeMain">trips</span>
@@ -58,11 +57,7 @@ const PlacesList = () => {
               </div>
 
               <div className="flex items-center gap-2">
-                <img
-                  alt="Country flag"
-                  width="30rem"
-                  src={`https://flagsapi.com/${place.countryCode}/flat/64.png`}
-                />{' '}
+                <FlagImg code={place.countryCode} />
                 <p>{place.country}</p>
               </div>
               <p className="text-greyMain">{formatDate(place.date)}</p>

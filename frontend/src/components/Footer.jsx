@@ -1,11 +1,11 @@
-import React from "react";
+import React from 'react';
 
 const Footer = () => {
   return (
-    <p className="text-limeMain font-bold">
-      {" "}
+    <footer className="text-sm text-greyMain	">
+      {' '}
       &copy; Copyright {new Date().getFullYear()} by Michal Wojcieszek
-    </p>
+    </footer>
   );
 };
 
