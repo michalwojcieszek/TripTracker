@@ -1,12 +1,10 @@
 import React from 'react';
-import { useTestMutation } from '../slices/usersApiSlice';
 
 const Logout = () => {
-  const [test] = useTestMutation();
-
   async function handleLogout() {
-    const text = await test();
-    console.log(text);
+    console.log('logout');
+    // const text = await test();
+    // console.log(text);
   }
 
   return (

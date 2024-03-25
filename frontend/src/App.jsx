@@ -18,6 +18,8 @@ import Home from './pages/Home';
 import LoginForm from './pages/LoginForm';
 import RegisterForm from './pages/RegisterForm';
 import PageNotFound from './pages/PageNotFound';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -46,6 +48,7 @@ function App() {
   return (
     <Provider store={store}>
       <RouterProvider router={router} />
+      <ToastContainer />
     </Provider>
   );
 }

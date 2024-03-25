@@ -2,16 +2,57 @@ import React, { useState } from 'react';
 import Form from '../components/Form';
 import FormRowDiv from '../components/FormRowDiv';
 import ButtonPrimary from '../components/ButtonPrimary';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import {
+  useLogoutMutation,
+  useRegisterMutation,
+} from '../slices/usersApiSlice';
+import { useDispatch } from 'react-redux';
+import { setCredentials } from '../slices/authSlice';
 
 const RegisterForm = () => {
-  const [userName, setUserName] = useState('');
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
+  const [register, { isLoading }] = useRegisterMutation();
+
+  function clearInputFields() {
+    setPassword('');
+    setEmail('');
+    setEmail('');
+    setName('');
+  }
+
+  async function handleRegister(e) {
+    e.preventDefault();
+    if (!email || !password || !name || !confirmPassword) {
+      toast.error('Fill all the fields');
+      return;
+    }
+    if (password !== confirmPassword) {
+      toast.error('The passwords you provided are different. Try again.');
+      return;
+    }
+
+    try {
+      const res = await register({ email, password, name }).unwrap();
+      dispatch(setCredentials({ ...res }));
+      clearInputFields();
+      setConfirmPassword('');
+      navigate('/add');
+    } catch (err) {
+      toast.error(err?.data?.message || err.error);
+    }
+  }
+
   return (
-    <Form>
+    <Form onSubmit={handleRegister}>
       <h2 className="py-3 text-center text-2xl font-bold">
         Start tracking your <span className="text-limeMain">trips</span>
       </h2>
@@ -28,8 +69,8 @@ const RegisterForm = () => {
         <label>Username</label>
         <input
           type="text"
-          value={userName}
-          onChange={(e) => setUserName(e.target.value)}
+          value={name}
+          onChange={(e) => setName(e.target.value)}
           className="bg rounded px-3 py-2"
         />
       </FormRowDiv>
