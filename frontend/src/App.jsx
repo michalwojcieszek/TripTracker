@@ -8,7 +8,6 @@ import { Provider } from 'react-redux';
 import AppLayout from './AppLayout';
 import store from './store';
 import AddPlaceForm from './components/AddPlaceForm';
-import Account from './components/Account';
 import MapSection from './components/MapSection';
 import PlacesList from './components/PlacesList';
 import CountriesList from './components/CountriesList';
@@ -33,7 +32,6 @@ const router = createBrowserRouter(
           <Route path="/continents" element={<ContinetsList />} />
           <Route path="/continents" element={<ContinetsList />} />
         </Route>
-        <Route element={<Account />} />
       </Route>
       <Route element={<Home />}>
         <Route path="/login" element={<LoginForm />} />,

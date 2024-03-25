@@ -2,17 +2,16 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 import colors from "colors";
 import users from "./data/users.js";
-import Finances from "./models/financesModel.js";
 import connectDB from "./config/db.js";
-
 import User from "./models/userModel.js";
+import Trips from "./models/tripsModel.js";
 
 dotenv.config();
 await connectDB();
 
 const importData = async () => {
   try {
-    await Finances.deleteMany();
+    await Trips.deleteMany();
     await User.deleteMany();
 
     const createdUsers = await User.insertMany(users);
@@ -28,7 +27,7 @@ const importData = async () => {
 
 const destroyData = async () => {
   try {
-    await Finances.deleteMany();
+    await Trips.deleteMany();
     await User.deleteMany();
 
     console.log("data destroyed!".red.inverse);
