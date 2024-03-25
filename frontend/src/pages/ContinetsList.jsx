@@ -1,20 +1,20 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import NoTripsYetText from './NoTripsYetText';
-import FlagImg from './FlagImg';
+import { ImEarth } from 'react-icons/im';
+import NoTripsYetText from '../components/NoTripsYetText';
 
-const CountriesList = () => {
+const ContinetsList = () => {
   const places = useSelector((state) => state.places);
-  const navigate = useNavigate();
 
-  const countries = places.reduce((acc, cur) => {
-    if (!acc.map((el) => el.country).includes(cur.country)) {
-      return [...acc, { country: cur.country, countryCode: cur.countryCode }];
+  const continents = places.reduce((acc, cur) => {
+    if (!acc.includes(cur.continent)) {
+      return [...acc, cur.continent];
     } else {
       return acc;
     }
   }, []);
+
+  console.log(continents);
 
   return (
     <>
@@ -22,20 +22,20 @@ const CountriesList = () => {
         <NoTripsYetText />
       ) : (
         <h2 className="mb-5 text-center text-2xl font-bold ">
-          Countries visited during your{' '}
+          Continets visited during your{' '}
           <span className="text-limeMain">trips</span>
         </h2>
       )}
       <ul className="flex w-full flex-col gap-4 ">
-        {countries.map((country) => (
+        {continents.map((continent) => (
           <li
             className={`z-50 flex w-full items-center justify-between overflow-x-hidden rounded-xl border-l-8 border-l-limeMain bg-greyLight px-5 py-3 transition-transform hover:translate-x-2`}
-            key={country.countryCode}
-            onClick={() => navigate(`${country.countryCode}`)}
+            key={continent}
           >
             <div className="flex items-center gap-2">
-              <FlagImg code={country.countryCode} />
-              <h3 className="text-lg font-bold">{country.country}</h3>
+              <ImEarth className="text-xl" />
+
+              <h3 className="text-lg font-bold">{continent}</h3>
             </div>
           </li>
         ))}
@@ -44,4 +44,4 @@ const CountriesList = () => {
   );
 };
 
-export default CountriesList;
+export default ContinetsList;

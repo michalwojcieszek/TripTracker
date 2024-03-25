@@ -7,17 +7,17 @@ import {
 import { Provider } from 'react-redux';
 import AppLayout from './AppLayout';
 import store from './store';
-import AddPlaceForm from './components/AddPlaceForm';
-import MapSection from './components/MapSection';
-import PlacesList from './components/PlacesList';
-import CountriesList from './components/CountriesList';
-import ContinetsList from './components/ContinetsList';
-import Place from './components/Place';
-import Country from './components/Country';
-import Home from './components/Home';
-import LoginForm from './components/LoginForm';
-import RegisterForm from './components/RegisterForm';
-import PageNotFound from './components/PageNotFound';
+import AddPlaceForm from './pages/AddPlaceForm';
+import MapSection from './pages/MapSection';
+import PlacesList from './pages/PlacesList';
+import CountriesList from './pages/CountriesList';
+import ContinetsList from './pages/ContinetsList';
+import Place from './pages/Place';
+import Country from './pages/Country';
+import Home from './pages/Home';
+import LoginForm from './pages/LoginForm';
+import RegisterForm from './pages/RegisterForm';
+import PageNotFound from './pages/PageNotFound';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -29,7 +29,6 @@ const router = createBrowserRouter(
           <Route path="/places/:id" element={<Place />} />
           <Route path="/countries" element={<CountriesList />} />
           <Route path="/countries/:id" element={<Country />} />
-          <Route path="/continents" element={<ContinetsList />} />
           <Route path="/continents" element={<ContinetsList />} />
         </Route>
       </Route>

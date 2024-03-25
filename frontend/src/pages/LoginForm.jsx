@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
-import Form from './Form';
-import FormRowDiv from './FormRowDiv';
-import ButtonPrimary from './ButtonPrimary';
+import Form from '../components/Form';
+import FormRowDiv from '../components/FormRowDiv';
+import ButtonPrimary from '../components/ButtonPrimary';
 import { Link } from 'react-router-dom';
 
 const LoginForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  function handleLogIn() {}
 
   return (
     <Form>
@@ -38,7 +40,7 @@ const LoginForm = () => {
           className="bg rounded px-3 py-2"
         />
       </FormRowDiv>
-      <ButtonPrimary>Log in</ButtonPrimary>
+      <ButtonPrimary onClick={handleLogIn}>Log in</ButtonPrimary>
     </Form>
   );
 };

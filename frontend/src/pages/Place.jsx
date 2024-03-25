@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { setCurrent } from '../slices/currentSlice';
-import Spinner from './Spinner';
+import Spinner from '../components/Spinner';
 
 const Place = () => {
   const { id } = useParams();

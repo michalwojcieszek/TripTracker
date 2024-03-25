@@ -1,9 +1,9 @@
 import React from 'react';
-import Map from './Map';
+import Map from '../components/Map';
 import { Outlet } from 'react-router-dom';
-import NavToggle from './NavToggle';
-import AppHeader from './AppHeader';
-import Footer from './Footer';
+import NavToggle from '../components/NavToggle';
+import AppHeader from '../components/AppHeader';
+import Footer from '../components/Footer';
 
 const MapSection = () => {
   return (

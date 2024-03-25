@@ -1,7 +1,7 @@
 import React from 'react';
-import Logo from './Logo';
+import Logo from '../components/Logo';
 import { Outlet } from 'react-router-dom';
-import Footer from './Footer';
+import Footer from '../components/Footer';
 
 const Home = () => {
   return (

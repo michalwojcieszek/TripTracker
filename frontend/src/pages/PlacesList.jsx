@@ -5,8 +5,8 @@ import { RiLandscapeFill } from 'react-icons/ri';
 import { FaBuildingColumns } from 'react-icons/fa6';
 import { useNavigate } from 'react-router-dom';
 import { removePlace } from '../slices/placesSlice';
-import NoTripsYetText from './NoTripsYetText';
-import FlagImg from './FlagImg';
+import NoTripsYetText from '../components/NoTripsYetText';
+import FlagImg from '../components/FlagImg';
 
 const PlacesList = () => {
   const places = useSelector((state) => state.places);

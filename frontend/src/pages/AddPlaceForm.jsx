@@ -5,10 +5,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addPlace } from '../slices/placesSlice';
 import { clearCurrent } from '../slices/currentSlice';
 import { useNavigate } from 'react-router-dom';
-import FlagImg from './FlagImg';
-import FormRowDiv from './FormRowDiv';
-import Form from './Form';
-import ButtonPrimary from './ButtonPrimary';
+import FlagImg from '../components/FlagImg';
+import FormRowDiv from '../components/FormRowDiv';
+import Form from '../components/Form';
+import ButtonPrimary from '../components/ButtonPrimary';
 
 const BASE_URL = 'https://api.bigdatacloud.net/data/reverse-geocode-client';
 

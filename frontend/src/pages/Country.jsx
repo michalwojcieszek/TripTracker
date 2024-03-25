@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import Spinner from './Spinner';
+import Spinner from '../components/Spinner';
 import { useDispatch } from 'react-redux';
 import { setCurrent } from '../slices/currentSlice';
 
