@@ -24,7 +24,7 @@ const Logout = () => {
   }
 
   return (
-    <div className="absolute right-3 top-3 z-[999] flex  items-center justify-center gap-3 rounded-md bg-greyLight px-4 py-2 shadow-[0_0px_32px_-0px_rgba(0,0,0,0.30)]">
+    <div className="absolute right-0 top-0 z-[999] flex  items-center justify-center gap-3 rounded-md px-4 py-2 md:right-3 md:top-3 md:bg-greyLight md:shadow-[0_0px_32px_-0px_rgba(0,0,0,0.30)]">
       <p className="text-lg font-bold">
         Hello, <span className="text-limeMain">{userInfo.name}</span> 👋
       </p>

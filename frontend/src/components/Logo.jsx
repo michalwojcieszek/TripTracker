@@ -6,8 +6,8 @@ const Logo = () => {
   return (
     <Link to="/login">
       <div className="flex items-center justify-center gap-2">
-        <ImLocation className="bounce text-5xl text-limeMain" />
-        <h1 className="text-5xl font-extrabold">
+        <ImLocation className="bounce shrink-0 text-4xl text-limeMain" />
+        <h1 className="text-4xl font-extrabold">
           <span className="text-limeMain">Trip</span>
           <span>Tracker</span>
         </h1>

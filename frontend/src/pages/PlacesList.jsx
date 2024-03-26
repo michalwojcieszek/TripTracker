@@ -76,9 +76,9 @@ const PlacesList = () => {
             <div>
               <div className="flex items-center gap-2">
                 {place.city ? (
-                  <FaBuildingColumns className="text-sm" />
+                  <FaBuildingColumns className="shrink-0 text-sm" />
                 ) : (
-                  <RiLandscapeFill className="text-md" />
+                  <RiLandscapeFill className="text-md shrink-0" />
                 )}
                 <h3 className="text-lg font-bold">
                   {place.city ? place.city : place.region}

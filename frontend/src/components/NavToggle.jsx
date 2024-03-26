@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 const NavToggle = () => {
   return (
     <nav className="mb-6 flex justify-center">
-      <ul className="flex ">
+      <ul className="flex tracking-wide	">
         <li>
           <NavLink
             className="rounded-l bg-greyLight px-5 py-2 text-xs uppercase"
