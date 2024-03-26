@@ -2,19 +2,23 @@ import React, { useEffect, useState } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { addPlace } from '../slices/placesSlice';
+import { setPlaces } from '../slices/placesSlice';
 import { clearCurrent } from '../slices/currentSlice';
 import { useNavigate } from 'react-router-dom';
 import FlagImg from '../components/FlagImg';
 import FormRowDiv from '../components/FormRowDiv';
 import Form from '../components/Form';
 import ButtonPrimary from '../components/ButtonPrimary';
+import { useAddTripMutation } from '../slices/tripsApiSlice';
+import { toast } from 'react-toastify';
+import Spinner from '../components/Spinner';
 
 const BASE_URL = 'https://api.bigdatacloud.net/data/reverse-geocode-client';
 
 const AddPlaceForm = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [addTrip, { isLoading, error }] = useAddTripMutation();
   const current = useSelector((state) => state.current);
 
   const [latitude, setLatitude] = useState('');
@@ -52,31 +56,14 @@ const AddPlaceForm = () => {
           setRegion(principalSubdivision);
           console.log(city, countryCode, countryName);
         } catch (err) {
-          console.log('failed to fetch');
+          toast.error(err?.data?.message || err.error);
         }
       }
       fetchGeolocationData();
     }
   }, [setLatitude, setLongitude, current]);
 
-  function addTripHandler(e) {
-    e.preventDefault();
-    const cityToSave = regionOnly ? '' : city;
-    const tripId = `${new Date().toISOString()}${date.toISOString()}`;
-    console.log(tripId);
-    dispatch(
-      addPlace({
-        coords: { lat: latitude, lng: longitude },
-        city: cityToSave,
-        region,
-        country,
-        countryCode,
-        date: date.toISOString(), // Convert Date to ISO string
-        description,
-        continent,
-        tripId,
-      }),
-    );
+  function clearInputFields() {
     setLatitude('');
     setLongitude('');
     setCity('');
@@ -85,11 +72,38 @@ const AddPlaceForm = () => {
     setDate(new Date());
     setDescription('');
     setRegionOnly(false);
-    dispatch(clearCurrent());
-    navigate('/places');
   }
 
-  return (
+  async function addTripHandler(e) {
+    e.preventDefault();
+    const cityToSave = regionOnly ? '' : city;
+    // const tripId = `${new Date().toISOString()}${date.toISOString()}`;
+    try {
+      const res = await addTrip({
+        coords: { lat: latitude, lng: longitude },
+        city: cityToSave,
+        region,
+        country,
+        countryCode,
+        date: date.toISOString(), // Convert Date to ISO string
+        description,
+        continent,
+      });
+      console.log(res.data.trips);
+      dispatch(setPlaces(res.data.trips));
+      clearInputFields();
+      dispatch(clearCurrent());
+      navigate('/places');
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  return isLoading ? (
+    <Spinner />
+  ) : error ? (
+    <p>{error?.data?.message || error.error}</p>
+  ) : (
     <>
       {current ? (
         countryCode ? (

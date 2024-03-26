@@ -8,6 +8,7 @@ import { setCredentials } from '../slices/authSlice';
 import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
 import Spinner from '../components/Spinner';
+import { useGetTripsMineQuery } from '../slices/tripsApiSlice';
 
 const LoginForm = () => {
   const dispatch = useDispatch();
@@ -15,7 +16,7 @@ const LoginForm = () => {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [login, { isLoading }] = useLoginMutation();
+  const [login, { isLoadingMutate }] = useLoginMutation();
 
   function clearInputFields() {
     setPassword('');
@@ -29,10 +30,10 @@ const LoginForm = () => {
       return;
     }
     try {
-      const res = await login({ email, password }).unwrap();
-      dispatch(setCredentials({ ...res }));
+      const resAuth = await login({ email, password }).unwrap();
+      dispatch(setCredentials({ ...resAuth }));
       clearInputFields();
-      navigate('/add');
+      navigate('/places');
     } catch (err) {
       toast.error(err?.data?.message || err.error);
     }
@@ -40,7 +41,7 @@ const LoginForm = () => {
 
   return (
     <>
-      {isLoading ? (
+      {isLoadingMutate ? (
         <Spinner />
       ) : (
         <Form onSubmit={handleLogIn}>
@@ -49,7 +50,7 @@ const LoginForm = () => {
             If you don't have an account &rarr;{' '}
             <Link
               to="/register"
-              className="text-limeMain underline underline-offset-2 hover:text-limeHover hover:no-underline"
+              className="uppercase text-limeMain underline underline-offset-2 hover:text-limeHover hover:no-underline"
             >
               register
             </Link>
@@ -60,7 +61,7 @@ const LoginForm = () => {
               type="mail"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="bg rounded px-3 py-2"
+              className="bg rounded bg-greyLight px-3 py-2"
             />
           </FormRowDiv>
           <FormRowDiv>
@@ -69,7 +70,7 @@ const LoginForm = () => {
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="bg rounded px-3 py-2"
+              className="bg rounded bg-greyLight px-3 py-2"
             />
           </FormRowDiv>
           <ButtonPrimary>Log in</ButtonPrimary>

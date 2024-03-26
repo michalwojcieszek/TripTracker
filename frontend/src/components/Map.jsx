@@ -12,7 +12,7 @@ import { setCurrent } from '../slices/currentSlice';
 import { useNavigate } from 'react-router-dom';
 import { useGeolocation } from '../hooks/useGeolocation';
 import FlagImg from './FlagImg';
-import Logout from './Logout';
+import Spinner from './Spinner';
 
 const Map = () => {
   const navigate = useNavigate();
@@ -57,13 +57,12 @@ const Map = () => {
     return null;
   }
 
-  return (
+  return !isLoadingPosition ? (
     <MapContainer
       center={mapPosition}
       zoom={5}
       scrollWheelZoom={true}
       style={{ height: '100%', width: '100%' }}
-      className="relative"
     >
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -89,10 +88,10 @@ const Map = () => {
         ))}
 
       <ChangeCenter position={mapPosition} />
-
       <DetectClick />
-      <Logout />
     </MapContainer>
+  ) : (
+    <Spinner />
   );
 };
 

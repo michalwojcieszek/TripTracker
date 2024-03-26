@@ -1,17 +1,35 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { MdOutlineCancel } from 'react-icons/md';
 import { RiLandscapeFill } from 'react-icons/ri';
 import { FaBuildingColumns } from 'react-icons/fa6';
 import { useNavigate } from 'react-router-dom';
-import { removePlace } from '../slices/placesSlice';
+import { setPlaces } from '../slices/placesSlice';
 import NoTripsYetText from '../components/NoTripsYetText';
 import FlagImg from '../components/FlagImg';
+import Spinner from '../components/Spinner';
+import {
+  useDeleteTripMutation,
+  useGetTripsMineQuery,
+} from '../slices/tripsApiSlice';
+import { toast } from 'react-toastify';
 
 const PlacesList = () => {
   const places = useSelector((state) => state.places);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const {
+    data,
+    isLoading: isLoadingGet,
+    error,
+    refetch,
+  } = useGetTripsMineQuery();
+  const [deleteTrip, { isLoading: isLoadingDelete }] = useDeleteTripMutation();
+
+  useEffect(() => {
+    dispatch(setPlaces(data));
+    refetch();
+  }, [dispatch, data, refetch]);
 
   const formatDate = (date) =>
     new Intl.DateTimeFormat('en', {
@@ -20,14 +38,25 @@ const PlacesList = () => {
       year: 'numeric',
     }).format(new Date(date));
 
-  function deleteTripHandler(id, e) {
+  async function deleteTripHandler(id, e) {
     e.stopPropagation();
-    dispatch(removePlace(id));
+    console.log(id);
+    try {
+      const { data } = await deleteTrip(id);
+      dispatch(setPlaces(data));
+      refetch();
+    } catch (err) {
+      toast.error(err?.data?.message || err.error);
+    }
   }
 
-  return (
+  return isLoadingGet || isLoadingDelete ? (
+    <Spinner />
+  ) : error ? (
+    <p>{error}</p>
+  ) : (
     <>
-      {places.length === 0 ? (
+      {places.length === 0 || !data ? (
         <NoTripsYetText />
       ) : (
         <h2 className="mb-5 text-center text-2xl font-bold ">
@@ -40,9 +69,9 @@ const PlacesList = () => {
       >
         {places.map((place) => (
           <li
-            className={`z-50 flex w-full items-center justify-between overflow-x-hidden rounded-xl border-l-8 border-l-limeMain bg-greyLight px-5 py-3 transition-transform hover:translate-x-2`}
-            onClick={() => navigate(`${place.tripId}`)}
-            key={place.tripId}
+            className={`z-50 flex w-full cursor-pointer items-center justify-between overflow-x-hidden rounded-xl border-l-8 border-l-limeMain bg-greyLight px-5 py-3 transition-transform hover:translate-x-2`}
+            onClick={() => navigate(`${place._id}`)}
+            key={place._id}
           >
             <div>
               <div className="flex items-center gap-2">
@@ -64,7 +93,7 @@ const PlacesList = () => {
             </div>
             <button
               className="text-3xl text-greyMedium hover:text-red-500"
-              onClick={(e) => deleteTripHandler(place.tripId, e)}
+              onClick={(e) => deleteTripHandler(place._id, e)}
             >
               <MdOutlineCancel />
             </button>

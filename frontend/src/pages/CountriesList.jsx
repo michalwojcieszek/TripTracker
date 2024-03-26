@@ -29,7 +29,7 @@ const CountriesList = () => {
       <ul className="flex w-full flex-col gap-4 ">
         {countries.map((country) => (
           <li
-            className={`z-50 flex w-full items-center justify-between overflow-x-hidden rounded-xl border-l-8 border-l-limeMain bg-greyLight px-5 py-3 transition-transform hover:translate-x-2`}
+            className={`z-50 flex w-full cursor-pointer items-center justify-between overflow-x-hidden rounded-xl border-l-8 border-l-limeMain bg-greyLight px-5 py-3 transition-transform hover:translate-x-2	`}
             key={country.countryCode}
             onClick={() => navigate(`${country.countryCode}`)}
           >

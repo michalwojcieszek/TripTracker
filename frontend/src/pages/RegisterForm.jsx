@@ -4,12 +4,10 @@ import FormRowDiv from '../components/FormRowDiv';
 import ButtonPrimary from '../components/ButtonPrimary';
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import {
-  useLogoutMutation,
-  useRegisterMutation,
-} from '../slices/usersApiSlice';
+import { useRegisterMutation } from '../slices/usersApiSlice';
 import { useDispatch } from 'react-redux';
 import { setCredentials } from '../slices/authSlice';
+import Spinner from '../components/Spinner';
 
 const RegisterForm = () => {
   const dispatch = useDispatch();
@@ -45,64 +43,70 @@ const RegisterForm = () => {
       dispatch(setCredentials({ ...res }));
       clearInputFields();
       setConfirmPassword('');
-      navigate('/add');
+      navigate('/places');
     } catch (err) {
       toast.error(err?.data?.message || err.error);
     }
   }
 
   return (
-    <Form onSubmit={handleRegister}>
-      <h2 className="py-3 text-center text-2xl font-bold">
-        Start tracking your <span className="text-limeMain">trips</span>
-      </h2>
-      <p className="text-greyMain">
-        If you already have an account &rarr;{' '}
-        <Link
-          to="/login"
-          className="text-limeMain underline underline-offset-2 hover:text-limeHover hover:no-underline"
-        >
-          log in
-        </Link>
-      </p>
-      <FormRowDiv>
-        <label>Username</label>
-        <input
-          type="text"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          className="bg rounded px-3 py-2"
-        />
-      </FormRowDiv>
-      <FormRowDiv>
-        <label>Email</label>
-        <input
-          type="mail"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          className="bg rounded px-3 py-2"
-        />
-      </FormRowDiv>
-      <FormRowDiv>
-        <label>Password</label>
-        <input
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          className="bg rounded px-3 py-2"
-        />
-      </FormRowDiv>
-      <FormRowDiv>
-        <label>Confirm password</label>
-        <input
-          type="password"
-          value={confirmPassword}
-          onChange={(e) => setConfirmPassword(e.target.value)}
-          className="bg rounded px-3 py-2"
-        />
-      </FormRowDiv>
-      <ButtonPrimary>Register</ButtonPrimary>
-    </Form>
+    <>
+      {isLoading ? (
+        <Spinner />
+      ) : (
+        <Form onSubmit={handleRegister}>
+          <h2 className="py-3 text-center text-2xl font-bold">
+            Start tracking your <span className="text-limeMain">trips</span>
+          </h2>
+          <p className="text-greyMain">
+            If you already have an account &rarr;{' '}
+            <Link
+              to="/login"
+              className="uppercase text-limeMain underline underline-offset-2 hover:text-limeHover hover:no-underline"
+            >
+              log in
+            </Link>
+          </p>
+          <FormRowDiv>
+            <label>Username</label>
+            <input
+              type="text"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              className="bg rounded bg-greyLight px-3 py-2"
+            />
+          </FormRowDiv>
+          <FormRowDiv>
+            <label>Email</label>
+            <input
+              type="mail"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="bg rounded bg-greyLight px-3 py-2"
+            />
+          </FormRowDiv>
+          <FormRowDiv>
+            <label>Password</label>
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="bg rounded bg-greyLight px-3 py-2"
+            />
+          </FormRowDiv>
+          <FormRowDiv>
+            <label>Confirm password</label>
+            <input
+              type="password"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              className="bg rounded bg-greyLight px-3 py-2"
+            />
+          </FormRowDiv>
+          <ButtonPrimary>Register</ButtonPrimary>
+        </Form>
+      )}
+    </>
   );
 };
 

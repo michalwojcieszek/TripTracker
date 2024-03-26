@@ -9,23 +9,17 @@ const placesSlice = createSlice({
   name: 'places',
   initialState,
   reducers: {
-    addPlace: (state, action) => {
-      if (state.length === 0) {
-        state = [action.payload];
-      } else {
-        state = [...state, action.payload];
-      }
+    setPlaces: (state, action) => {
+      state = action.payload;
       return state;
-      //   localStorage.setItem('places', JSON.stringify(action.payload));
     },
-    removePlace: (state, action) => {
-      state = state.filter((place) => place.tripId !== action.payload);
+    clearAllPlaces: (state, action) => {
+      state = [];
       return state;
-      // localStorage.getItem('places').clear();
     },
   },
 });
 
-export const { addPlace, removePlace } = placesSlice.actions;
+export const { setPlaces, removePlace, clearAllPlaces } = placesSlice.actions;
 
 export default placesSlice.reducer;

@@ -25,7 +25,7 @@ const router = createBrowserRouter(
   createRoutesFromElements(
     <>
       <Route element={<AppLayout />}>
-        <Route path="/" element={<MapSection />}>
+        <Route path="" element={<MapSection />}>
           <Route path="/add" element={<AddPlaceForm />} />
           <Route path="/places" element={<PlacesList />} />
           <Route path="/places/:id" element={<Place />} />
