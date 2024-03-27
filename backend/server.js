@@ -5,6 +5,7 @@ import { notFound, errorHandler } from "./middleware/errorMiddleware.js";
 import userRoutes from "./routes/userRoutes.js";
 import tripsRoutes from "./routes/tripsRoutes.js";
 import cookieParser from "cookie-parser";
+import path, { dirname } from "path";
 
 dotenv.config();
 //Connect to MongoDB
@@ -23,19 +24,9 @@ app.use(cookieParser());
 app.use("/api/users", userRoutes);
 app.use("/api/trips", tripsRoutes);
 
-if (process.env.NODE_ENV === "production") {
-  //set static folder
-  app.use(express.static(path.join(__dirname, "/frontend/build")));
-
-  //any route that is not api will be redirected to index.html
-  app.get("*", (req, res) =>
-    res.sendFile(path.resolve(__dirname, "frontend", "build", "index.html"))
-  );
-} else {
-  app.get("/", (req, res) => {
-    res.send("API is running...");
-  });
-}
+app.get("/", (req, res) => {
+  res.send("API is running");
+});
 
 app.use(notFound);
 
