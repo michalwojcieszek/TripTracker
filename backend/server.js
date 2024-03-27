@@ -24,10 +24,6 @@ app.use(cookieParser());
 app.use("/api/users", userRoutes);
 app.use("/api/trips", tripsRoutes);
 
-app.get("/", (req, res) => {
-  res.send("API is running");
-});
-
 app.use(notFound);
 
 app.use(errorHandler);
