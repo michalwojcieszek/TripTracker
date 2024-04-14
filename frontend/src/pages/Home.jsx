@@ -28,7 +28,7 @@ const Home = () => {
           backgroundImage: `linear-gradient(
             rgba(255, 255, 255, 0.8),
             rgba(255, 255, 255, 0.9)
-          ),url(${process.env.PUBLIC_URL}/hero.jpg)`,
+          ),url(${process.env.PUBLIC_URL}/hero.webp)`,
         }}
       >
         <div className="w-full rounded-md bg-white px-5 py-4 shadow-[0_0px_32px_-0px_rgba(0,0,0,0.15)] sm:w-3/4 lg:w-1/2 xl:w-1/3">
