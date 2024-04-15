@@ -11,6 +11,8 @@ const Home = () => {
   useEffect(() => {
     if (userInfo) {
       navigate('/places');
+    } else {
+      navigate('/login');
     }
   }, [userInfo, navigate]);
 
