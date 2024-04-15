@@ -69,7 +69,7 @@ const PlacesList = () => {
       >
         {places.map((place) => (
           <li
-            className={`z-50 flex w-full cursor-pointer items-center justify-between overflow-x-hidden rounded-xl border-l-8 border-l-limeMain bg-greyLight px-5 py-3 transition-transform hover:translate-x-2`}
+            className={`z-50 flex w-full cursor-pointer items-center justify-between overflow-x-hidden rounded-xl border-l-8 border-l-limeMain bg-greyLight px-5 py-3 transition-transform duration-500	 hover:translate-x-2`}
             onClick={() => navigate(`${place._id}`)}
             key={place._id}
           >

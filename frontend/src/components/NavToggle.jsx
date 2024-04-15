@@ -1,33 +1,18 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import NavLinkBar from './NavLinkBar';
 
 const NavToggle = () => {
   return (
     <nav className="mb-6 flex justify-center">
-      <ul className="flex tracking-wide	">
+      <ul className="flex  tracking-wide">
         <li>
-          <NavLink
-            className="rounded-l bg-greyLight px-5 py-2 text-xs uppercase"
-            to="/places"
-          >
-            Places
-          </NavLink>
+          <NavLinkBar linkTo="places">Places</NavLinkBar>
         </li>
         <li>
-          <NavLink
-            className=" bg-greyLight px-5 py-2 text-xs uppercase"
-            to="/countries"
-          >
-            Countries
-          </NavLink>
+          <NavLinkBar linkTo="countries">Countries</NavLinkBar>
         </li>
         <li>
-          <NavLink
-            to="/continents"
-            className=" rounded-r bg-greyLight px-5 py-2 text-xs uppercase"
-          >
-            Continents
-          </NavLink>
+          <NavLinkBar linkTo="continents">Continents</NavLinkBar>
         </li>
       </ul>
     </nav>

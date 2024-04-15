@@ -24,12 +24,12 @@ const Logout = () => {
   }
 
   return (
-    <div className="absolute right-0 top-0 z-[999] flex  items-center justify-center gap-3 rounded-md px-4 py-2 md:right-3 md:top-3 md:bg-greyLight md:shadow-[0_0px_32px_-0px_rgba(0,0,0,0.30)]">
-      <p className="text-lg font-bold">
+    <div className="text-md absolute right-0 top-0 z-[999]  flex items-center justify-center gap-3 rounded-md px-4 py-2 font-bold sm:text-lg md:right-3 md:top-3 md:bg-greyLight md:shadow-[0_0px_32px_-0px_rgba(0,0,0,0.30)]">
+      <p className="">
         Hello, <span className="text-limeMain">{userInfo.name}</span> 👋
       </p>
       <button
-        className="rounded bg-limeMain px-4 py-2 font-bold tracking-wider hover:bg-limeHover"
+        className="rounded bg-limeMain px-4 py-2 tracking-wider hover:bg-limeHover"
         onClick={handleLogout}
       >
         LOGOUT
