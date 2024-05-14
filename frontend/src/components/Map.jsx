@@ -52,12 +52,6 @@ const Map = () => {
     };
 
     handleMediaQueryChange(mediaQuery);
-
-    mediaQuery.addEventListener('change', handleMediaQueryChange);
-
-    return () => {
-      mediaQuery.removeEventListener('change', handleMediaQueryChange);
-    };
   }, []);
 
   function DetectClick() {
