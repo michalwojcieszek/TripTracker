@@ -82,8 +82,8 @@ const Map = () => {
       zoom={5}
       scrollWheelZoom={true}
       style={{ height: '100%', width: '100%' }}
-      dragging={isDraggingEnabled}
-      tap={!L.Browser.mobile}
+      dragging={!L.Browser.mobile}
+      // tap={!L.Browser.mobile}
     >
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
