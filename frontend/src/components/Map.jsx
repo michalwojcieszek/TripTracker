@@ -21,7 +21,6 @@ const Map = () => {
   const dispatch = useDispatch();
   const places = useSelector((state) => state.places);
   const current = useSelector((state) => state.current);
-  const [isDraggingEnabled, setIsDraggingEnabled] = useState(true);
 
   const {
     isLoading: isLoadingPosition,
@@ -40,23 +39,6 @@ const Map = () => {
       }
     }
   }, [geolocationPosition, current]);
-
-  // useEffect(() => {
-  // const mediaQuery = window.matchMedia('(max-width: 768px)');
-
-  // const handleMediaQueryChange = (e) => {
-  //   if (e.matches) {
-  //     setIsDraggingEnabled(false);
-  //   } else {
-  //     setIsDraggingEnabled(true);
-  //   }
-  // };
-
-  // handleMediaQueryChange(mediaQuery);
-  //   const isMobile = L.Browser.mobile;
-  //   console.log(`is mobile: ${isMobile}`);
-  //   setIsDraggingEnabled(!isMobile);
-  // }, []);
 
   function DetectClick() {
     useMapEvents({
