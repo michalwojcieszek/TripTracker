@@ -20,6 +20,7 @@ const Map = () => {
   const dispatch = useDispatch();
   const places = useSelector((state) => state.places);
   const current = useSelector((state) => state.current);
+  const [isDraggingEnabled, setIsDraggingEnabled] = useState(true);
 
   const {
     isLoading: isLoadingPosition,
@@ -38,6 +39,26 @@ const Map = () => {
       }
     }
   }, [geolocationPosition, current]);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(max-width: 768px)');
+
+    const handleMediaQueryChange = (e) => {
+      if (e.matches) {
+        setIsDraggingEnabled(false);
+      } else {
+        setIsDraggingEnabled(true);
+      }
+    };
+
+    handleMediaQueryChange(mediaQuery);
+
+    mediaQuery.addEventListener('change', handleMediaQueryChange);
+
+    return () => {
+      mediaQuery.removeEventListener('change', handleMediaQueryChange);
+    };
+  }, []);
 
   function DetectClick() {
     useMapEvents({
@@ -63,7 +84,7 @@ const Map = () => {
       zoom={5}
       scrollWheelZoom={true}
       style={{ height: '100%', width: '100%' }}
-      // dragging={false}
+      dragging={isDraggingEnabled}
     >
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
