@@ -7,6 +7,7 @@ import {
   useMap,
   useMapEvents,
 } from 'react-leaflet';
+import L from 'leaflet';
 import { useDispatch, useSelector } from 'react-redux';
 import { setCurrent } from '../slices/currentSlice';
 import { useNavigate } from 'react-router-dom';
@@ -40,19 +41,22 @@ const Map = () => {
     }
   }, [geolocationPosition, current]);
 
-  useEffect(() => {
-    const mediaQuery = window.matchMedia('(max-width: 768px)');
+  // useEffect(() => {
+  // const mediaQuery = window.matchMedia('(max-width: 768px)');
 
-    const handleMediaQueryChange = (e) => {
-      if (e.matches) {
-        setIsDraggingEnabled(false);
-      } else {
-        setIsDraggingEnabled(true);
-      }
-    };
+  // const handleMediaQueryChange = (e) => {
+  //   if (e.matches) {
+  //     setIsDraggingEnabled(false);
+  //   } else {
+  //     setIsDraggingEnabled(true);
+  //   }
+  // };
 
-    handleMediaQueryChange(mediaQuery);
-  }, []);
+  // handleMediaQueryChange(mediaQuery);
+  //   const isMobile = L.Browser.mobile;
+  //   console.log(`is mobile: ${isMobile}`);
+  //   setIsDraggingEnabled(!isMobile);
+  // }, []);
 
   function DetectClick() {
     useMapEvents({
@@ -79,6 +83,7 @@ const Map = () => {
       scrollWheelZoom={true}
       style={{ height: '100%', width: '100%' }}
       dragging={isDraggingEnabled}
+      tap={!L.Browser.mobile}
     >
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
